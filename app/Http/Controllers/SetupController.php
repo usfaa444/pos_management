@@ -144,7 +144,7 @@ class SetupController extends Controller
     {
         ini_set('max_execution_time', 600); //600 seconds = 10 minutes
         try {
-            /*$this->changeEnv([
+            $this->changeEnv([
                 'APP_NAME' => session('env.APP_NAME'),
                 'APP_ENV' => session('env.APP_ENV'),
                 'APP_KEY' => session('env.APP_KEY'),
@@ -158,7 +158,7 @@ class SetupController extends Controller
                 'DB_DATABASE' => session('env.DB_DATABASE'),
                 'DB_USERNAME' => session('env.DB_USERNAME'),
                 'DB_PASSWORD' => session('env.DB_PASSWORD'),
-            ]);*/
+            ]);
 
             Artisan::call('config:cache');
             Artisan::call('config:clear');
