@@ -23,9 +23,23 @@ echo "Running optimizations..."
 php artisan optimize:clear
 
 echo "Waiting for database connection..."
-until php -r "try { new PDO('mysql:host='.getenv('DB_HOST').';port='.getenv('DB_PORT').';dbname='.getenv('DB_DATABASE'), getenv('DB_USERNAME'), getenv('DB_PASSWORD')); exit(0); } catch(Exception \$e) { exit(1); }"; do
+until php -r "
+try {
+    \$host = getenv('DB_HOST');
+    \$port = getenv('DB_PORT');
+    \$db   = getenv('DB_DATABASE');
+    \$user = getenv('DB_USERNAME');
+    \$pass = getenv('DB_PASSWORD');
+    new PDO(\"mysql:host=\$host;port=\$port;dbname=\$db\", \$user, \$pass);
+    exit(0);
+} catch(Exception \$e) {
+    echo 'Connection failed: ' . \$e->getMessage() . PHP_EOL;
+    exit(1);
+}
+"; do
   sleep 2
 done
+echo "Database connected!"
 
 echo "Running migrations..."
 php artisan migrate --force
