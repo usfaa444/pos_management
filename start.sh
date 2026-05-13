@@ -1,6 +1,11 @@
 #!/bin/bash
 set -e
 
+if [ ! -d "vendor" ]; then
+    echo "Vendor directory not found. Installing dependencies..."
+    composer install --no-interaction --optimize-autoloader
+fi
+
 echo "Running optimizations..."
 php artisan optimize:clear
 
