@@ -6,6 +6,9 @@ if [ ! -d "vendor" ]; then
     composer install --no-interaction --optimize-autoloader
 fi
 
+echo "Fixing storage and cache permissions..."
+chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+
 echo "Running optimizations..."
 php artisan optimize:clear
 
