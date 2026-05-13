@@ -165,11 +165,11 @@ class SetupController extends Controller
             Artisan::call('config:clear');
 
             //Artisan::call('migrate:fresh --force --seed');
-            Artisan::call('db:seed');
+            Artisan::call('db:seed', ['--force' => true]);
 
 
             //Artisan::call('migrate', ['--force' => true, '--path' => 'vendor/laravel/passport/database/migrations']);
-            Artisan::call('passport:install --force');
+            Artisan::call('passport:install', ['--force' => true]);
             Storage::disk('public')->put('installed', 'Contents');
             //dd($request);
 
