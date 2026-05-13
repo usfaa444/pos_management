@@ -15,6 +15,9 @@ mkdir -p /var/www/html/bootstrap/cache
 
 echo "Fixing storage and cache permissions..."
 chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+if [ -f "/var/www/html/.env" ]; then
+    chown www-data:www-data /var/www/html/.env
+fi
 
 echo "Running optimizations..."
 php artisan optimize:clear
