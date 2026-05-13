@@ -6,6 +6,13 @@ if [ ! -d "vendor" ]; then
     composer install --no-interaction --optimize-autoloader
 fi
 
+echo "Ensuring required directories exist..."
+mkdir -p /var/www/html/storage/framework/sessions
+mkdir -p /var/www/html/storage/framework/views
+mkdir -p /var/www/html/storage/framework/cache
+mkdir -p /var/www/html/storage/logs
+mkdir -p /var/www/html/bootstrap/cache
+
 echo "Fixing storage and cache permissions..."
 chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
